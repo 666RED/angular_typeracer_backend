@@ -1,8 +1,8 @@
 services:
   api-gateway:
     build:
-      context: ./docker/api-gateway
-      dockerfile: ./Dockerfile
+      context: .
+      dockerfile: ./docker/api-gateway/Dockerfile
       args:
         APP_NAME: api-gateway
         APP_PORT: 3000
@@ -17,8 +17,8 @@ services:
 
   auth:
     build:
-      context: ./docker/auth
-      dockerfile: ./Dockerfile
+      context: .
+      dockerfile: ./docker/auth/Dockerfile
       args:
         APP_NAME: auth
         APP_PORT: 3001
@@ -27,8 +27,8 @@ services:
 
   room:
     build:
-      context: ./docker/room
-      dockerfile: ./Dockerfile
+      context: .
+      dockerfile: ./docker/room/Dockerfile
       args:
         APP_NAME: room
         APP_PORT: 3002
@@ -37,8 +37,8 @@ services:
 
   user:
     build:
-      context: ./docker/user
-      dockerfile: ./Dockerfile
+      context: .
+      dockerfile: ./docker/user/Dockerfile
       args:
         APP_NAME: user
         APP_PORT: 3003
