@@ -20,6 +20,8 @@ async function bootstrap() {
   app.enableCors({
     origin: ['http://localhost:4200', 'https://laravel-react-typeracer.online'],
     credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Accept, Authorization',
   });
   app.use(cookieParser());
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));

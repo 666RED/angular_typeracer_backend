@@ -19,6 +19,9 @@ RUN npx nx build api-gateway
 FROM node:20-alpine
 WORKDIR /app
 
+# Install Postgres client (for pg_isready)
+RUN apk add --no-cache postgresql-client
+
 # Install only production dependencies
 COPY ../../package*.json ./
 RUN npm install --omit=dev
@@ -26,7 +29,9 @@ RUN npm install --omit=dev
 # Copy built app from builder stage
 COPY --from=builder /app/dist/apps/api-gateway ./dist
 
+COPY ./docker/api-gateway/entrypoint.sh ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
+
 EXPOSE 3000
 
-# Run the application
-CMD ["node", "dist/main.js"]
+ENTRYPOINT ["./entrypoint.sh"]
