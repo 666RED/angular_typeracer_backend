@@ -14,7 +14,19 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@backend/contracts": ["libs/contracts/src/index.ts"],
+      "@backend/postgres": ["libs/postgres/src/index.ts"],
+      "@decorators": ["libs/common/src/lib/decorators/index.ts"],
+      "@filters": ["libs/common/src/lib/filters/index.ts"],
+      "@guards": ["libs/common/src/lib/guards/index.ts"],
+      "@middlewares": ["libs/common/src/lib/middlewares/index.ts"],
+      "@models": ["libs/common/src/lib/models/index.ts"],
+      "@strategy": ["libs/common/src/lib/strategy/index.ts"],
+      "@entities": ["libs/postgres/src/lib/entities/index.ts"]
+    },
+    "typeRoots": ["./node_modules/@types"],
+    "outDir": "./dist"
   },
   "exclude": ["node_modules", "tmp"]
 }

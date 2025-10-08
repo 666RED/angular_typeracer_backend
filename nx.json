@@ -39,7 +39,27 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/backend-e2e/**/*"]
+      "exclude": [
+        "apps/api-gateway-e2e/**/*",
+        "auth-e2e/**/*",
+        "apps/auth-e2e/**/*",
+        "apps/user-e2e/**/*",
+        "apps/room-e2e/**/*"
+      ]
+    },
+    {
+      "plugin": "@nx/docker",
+      "options": {
+        "buildTarget": "docker:build",
+        "runTarget": "docker:run"
+      }
     }
-  ]
+  ],
+  "targetDefaults": {
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    }
+  }
 }
