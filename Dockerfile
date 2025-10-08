@@ -1,6 +1,10 @@
 # ---- Builder Stage ----
 FROM node:20-alpine AS builder
 
+ARG APP_NAME
+ARG APP_NAME
+ARG APP_PORT
+
 WORKDIR /app
 
 # Install all dependencies
@@ -13,7 +17,6 @@ COPY apps ./apps
 COPY libs ./libs
 
 # Build the selected app
-ARG APP_NAME
 RUN npx nx build $APP_NAME
 
 # ---- Runtime Stage ----
@@ -25,8 +28,6 @@ COPY package*.json ./
 RUN npm install --omit=dev
 
 # Copy built app from builder stage
-ARG APP_NAME
-ARG APP_PORT
 COPY --from=builder /app/dist/apps/${APP_NAME} ./dist
 
 ENV NODE_ENV=production
