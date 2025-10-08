@@ -1,7 +1,7 @@
 services:
   api-gateway:
     build:
-      context: .
+      context: ./docker/api-gateway
       dockerfile: ./Dockerfile
       args:
         APP_NAME: api-gateway
@@ -17,7 +17,7 @@ services:
 
   auth:
     build:
-      context: .
+      context: ./docker/auth
       dockerfile: ./Dockerfile
       args:
         APP_NAME: auth
@@ -27,7 +27,7 @@ services:
 
   room:
     build:
-      context: .
+      context: ./docker/room
       dockerfile: ./Dockerfile
       args:
         APP_NAME: room
@@ -37,7 +37,7 @@ services:
 
   user:
     build:
-      context: .
+      context: ./docker/user
       dockerfile: ./Dockerfile
       args:
         APP_NAME: user
