@@ -9,7 +9,7 @@ WORKDIR /app
 
 # Install all dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm install --include=dev
 
 # Copy files needed for dependency install & build
 COPY nx.json tsconfig.base.json ./
