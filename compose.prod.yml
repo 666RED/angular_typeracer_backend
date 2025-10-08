@@ -1,0 +1,70 @@
+services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        APP_NAME: api-gateway
+        APP_PORT: 3000
+    ports:
+      - '3000:3000'
+    depends_on:
+      - auth
+      - room
+      - user
+    networks:
+      - app-network
+
+  auth:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        APP_NAME: auth
+        APP_PORT: 3001
+    networks:
+      - app-network
+
+  room:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        APP_NAME: room
+        APP_PORT: 3002
+    networks:
+      - app-network
+
+  user:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        APP_NAME: user
+        APP_PORT: 3003
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:17.5
+    user: postgres
+    container_name: pg-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    healthcheck:
+      test: ['CMD', 'pg_isready']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres-data-production:/var/lib/postgresql/data
+    networks:
+      - app-network
+volumes:
+  postgres-data-production:
+networks:
+  app-network:
+    driver: bridge
