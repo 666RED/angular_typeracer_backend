@@ -11,4 +11,4 @@ echo "🚀 Running TypeORM migrations..."
 npm run migration:run || { echo "❌ Migration failed"; exit 1; }
 
 echo "🏁 Starting the API Gateway..."
-node dist/main.js
+node dist/apps/api-gateway/main.js

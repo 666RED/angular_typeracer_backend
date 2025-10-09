@@ -27,8 +27,7 @@ COPY ../../package*.json ./
 RUN npm install --omit=dev
 
 # Copy built app from builder stage
-COPY --from=builder /app/dist/apps/api-gateway ./dist/apps/api-gateway
-COPY --from=builder /app/dist/libs ./dist/libs
+COPY --from=builder /app/dist ./dist
 
 COPY ./docker/api-gateway/entrypoint.sh ./entrypoint.sh
 RUN chmod +x ./entrypoint.sh

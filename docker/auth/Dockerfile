@@ -24,9 +24,9 @@ COPY ../../package*.json ./
 RUN npm install --omit=dev
 
 # Copy built app from builder stage
-COPY --from=builder /app/dist/apps/auth ./dist
+COPY --from=builder /app/dist ./dist
 
 EXPOSE 3001
 
 # Run the application
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/apps/auth/main.js"]
